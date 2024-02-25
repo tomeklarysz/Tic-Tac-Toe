@@ -1,5 +1,5 @@
 let Gameboard = (function () {
-  let gameboard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+  let gameboard = [['O', ' ', 'O'], ['X', ' ', ' '], ['O', 'X', ' ']];
   return gameboard;
 })();
 
@@ -23,19 +23,24 @@ const isGameOver = () => {
     if (isEqual(Gameboard[x])) {
       return true;
     }
+    let vertical = [];
     for (let i in Gameboard[x]) {
-      // console.log(Gameboard[x][i]);
+      vertical.push(Gameboard[i][x]);
       if (i === x) {
         diagonalDown.push(Gameboard[x][i]);
       }
-      if (Math.abs(x-i) === 2) {
+      if ((Number(x) + Number(i)) === 2) {
         diagonalUp.push(Gameboard[x][i])
       }
+    }
+    if (isEqual(vertical)) {
+      return true;
     }
   }
   if (isEqual(diagonalDown) || isEqual(diagonalUp)) {
     return true;
   }
+  return false;
 }
 
 function createPlayer(name, marker = 'X') {
