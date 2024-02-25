@@ -13,6 +13,30 @@ const displayBoard = (() => {
 })();
 displayBoard();
 
+// function to check if all elements from array are equal
+const isEqual = (arr) => arr.every((val) => (val === arr[0]) && val !== ' ');
+
+const isGameOver = () => {
+  let diagonalDown = [];
+  let diagonalUp = [];
+  for (let x in Gameboard) {
+    if (isEqual(Gameboard[x])) {
+      return true;
+    }
+    for (let i in Gameboard[x]) {
+      // console.log(Gameboard[x][i]);
+      if (i === x) {
+        diagonalDown.push(Gameboard[x][i]);
+      }
+      if (Math.abs(x-i) === 2) {
+        diagonalUp.push(Gameboard[x][i])
+      }
+    }
+  }
+  if (isEqual(diagonalDown) || isEqual(diagonalUp)) {
+    return true;
+  }
+}
 
 function createPlayer(name, marker = 'X') {
   let score = 0;
@@ -50,4 +74,5 @@ console.log({
   score: player1.getScore()
 });
 
+console.log(isGameOver());
 displayBoard();
