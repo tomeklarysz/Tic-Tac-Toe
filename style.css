@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tic-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 1px solid white;
+}
+
+.tic-box > div {
+  border: 1px solid white;
+  height: 150px;
+  width: 150px;
+}
+
+.row-0 {
+  grid-row: 1 / 2;
+}
+
+.row-1 {
+  grid-row: 2 / 3;
+}
+
+.row-2 {
+  grid-row: 3 / 4;;
+}
