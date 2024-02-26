@@ -1,5 +1,5 @@
 let Gameboard = (function () {
-  let gameboard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+  let gameboard = [[' ', 'X', ' '], [' ', ' ', ' '], [' ', 'O', ' ']];
   return gameboard;
 })();
 
@@ -12,6 +12,12 @@ const displayBoard = (() => {
   };
 })();
 displayBoard();
+
+const clearBoard = () => {
+  for (let i in Gameboard) {
+    Gameboard[i].fill(' ');
+  }
+};
 
 // function to check if all elements from array are equal
 const isEqual = (arr) => arr.every((val) => (val === arr[0]) && val !== ' ');
@@ -85,3 +91,6 @@ console.log({
 });
 
 console.log(isGameOver());
+
+clearBoard();
+displayBoard();
