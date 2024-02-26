@@ -1,5 +1,5 @@
 let Gameboard = (function () {
-  let gameboard = [['O', ' ', 'O'], ['X', ' ', ' '], ['O', 'X', ' ']];
+  let gameboard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
   return gameboard;
 })();
 
@@ -43,6 +43,8 @@ const isGameOver = () => {
   return false;
 }
 
+const canMove = (str) => str !== ' ';
+
 function createPlayer(name, marker = 'X') {
   let score = 0;
   const getScore = () => score;
@@ -61,13 +63,16 @@ function createPlayer(name, marker = 'X') {
       default:
         throw new Error('No such column');
     }
-    Gameboard[column][row] = marker;
+    if (canMove(Gameboard[column][row])) {
+      Gameboard[column][row] = marker;
+    }
   };
   return { name, marker, getScore, addPoint, move };
 }
 
 const player1 = createPlayer('tomek');
-player1.addPoint();
+const player2 = createPlayer('opponent', 'O');
+
 try {
   player1.move('A', 0);
 } catch (e) {
@@ -80,4 +85,3 @@ console.log({
 });
 
 console.log(isGameOver());
-displayBoard();
