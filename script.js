@@ -1,5 +1,5 @@
 let Gameboard = (function () {
-  let gameboard = [[' ', 'X', ' '], [' ', ' ', ' '], [' ', 'O', ' ']];
+  let gameboard = [[' ', 'X', ' '], [' ', ' ', ' '], [' ', 'O', 'X']];
   return gameboard;
 })();
 
@@ -18,6 +18,21 @@ const clearBoard = () => {
     Gameboard[i].fill(' ');
   }
 };
+
+const currentTurn = (() => {
+  let countX = 0;
+  let countO = 0;
+  for (let i in Gameboard) {
+    for (let j in Gameboard[i]) {
+      if (Gameboard[i][j] === 'X') {
+        countX++;
+      } else if (Gameboard[i][j] === 'O') {
+        countO++;
+      }
+    }
+  }
+  return countX <= countO ? 'X' : 'O';
+})();
 
 // function to check if all elements from array are equal
 const isEqual = (arr) => arr.every((val) => (val === arr[0]) && val !== ' ');
@@ -76,6 +91,33 @@ function createPlayer(name, marker = 'X') {
   return { name, marker, getScore, addPoint, move };
 }
 
+const boxListener = (item) => {
+  item.addEventListener('click', () => {
+    item.innerText = currentTurn;
+  })
+}
+
+const addBox = () => {
+  const box = document.querySelector('.tic-box');
+  for (let row in Gameboard) {
+    for (let column in Gameboard[row]) {
+      const p = document.createElement('div');
+      p.setAttribute('class', `row-${row}`)
+      boxListener(p);
+      box.appendChild(p);
+    }
+  }
+}
+
+const displayBox = () => {
+  const ticDivs = document.querySelector('.tic-box').querySelectorAll('div');
+  const flatArr = Gameboard.flat();
+  const arr = Array.from(ticDivs);
+  arr.forEach((item, index) => {
+    item.innerText = flatArr[index];
+  })
+}
+
 const player1 = createPlayer('tomek');
 const player2 = createPlayer('opponent', 'O');
 
@@ -90,7 +132,11 @@ console.log({
   score: player1.getScore()
 });
 
-console.log(isGameOver());
+// console.log(isGameOver());
 
-clearBoard();
-displayBoard();
+// clearBoard();
+// displayBoard();
+
+addBox();
+displayBox();
+console.log(currentTurn);
