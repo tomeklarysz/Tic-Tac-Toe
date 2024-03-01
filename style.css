@@ -1,6 +1,5 @@
 body {
   background-color: black;
-  text-align: center;
   color: white;
   margin: 0;
 }
@@ -23,6 +22,10 @@ body {
   border: 1px solid white;
   height: 150px;
   width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
 }
 
 .row-0 {
@@ -35,4 +38,28 @@ body {
 
 .row-2 {
   grid-row: 3 / 4;;
+}
+
+#scoreboard {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  width: 450px;
+}
+
+p {
+  margin: 10px;
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+}
+
+.player {
+  padding: 20px;
+}
+
+.player > div {
+  color: yellowgreen;
 }
