@@ -11,7 +11,6 @@ const displayBoard = (() => {
     }
   };
 })();
-displayBoard();
 
 const clearBoard = () => {
   for (let i in Gameboard) {
@@ -19,7 +18,7 @@ const clearBoard = () => {
   }
 };
 
-const currentTurn = (() => {
+const currentTurn = () => {
   let countX = 0;
   let countO = 0;
   for (let i in Gameboard) {
@@ -32,7 +31,7 @@ const currentTurn = (() => {
     }
   }
   return countX <= countO ? 'X' : 'O';
-})();
+};
 
 // function to check if all elements from array are equal
 const isEqual = (arr) => arr.every((val) => (val === arr[0]) && val !== ' ');
@@ -64,26 +63,13 @@ const isGameOver = () => {
   return false;
 }
 
-const canMove = (str) => str !== ' ';
+const canMove = (str) => str === ' ';
 
 function createPlayer(name, marker = 'X') {
   let score = 0;
   const getScore = () => score;
   const addPoint = () => score++;
   const move = (column, row) => {
-    switch (column) {
-      case 'A':
-        column = 0;
-        break;
-      case 'B':
-        column = 1;
-        break;
-      case 'C':
-        column = 2;
-        break;
-      default:
-        throw new Error('No such column');
-    }
     if (canMove(Gameboard[column][row])) {
       Gameboard[column][row] = marker;
     }
@@ -91,10 +77,8 @@ function createPlayer(name, marker = 'X') {
   return { name, marker, getScore, addPoint, move };
 }
 
-const boxListener = (item) => {
-  item.addEventListener('click', () => {
-    item.innerText = currentTurn;
-  })
+const updateScore = (player) => {
+  player.addPoint();
 }
 
 const addBox = () => {
@@ -103,7 +87,17 @@ const addBox = () => {
     for (let column in Gameboard[row]) {
       const p = document.createElement('div');
       p.setAttribute('class', `row-${row}`)
-      boxListener(p);
+      p.addEventListener('click', () => {
+        console.log(row);
+        console.log(column);
+        if (currentTurn() === 'X') {
+          player1.move(row, column);
+        } else {
+          player2.move(row, column);
+        }
+        displayBoard();
+        displayBox();
+      });
       box.appendChild(p);
     }
   }
@@ -118,25 +112,21 @@ const displayBox = () => {
   })
 }
 
+const play = () => {
+  addBox();
+  do {
+    displayBoard();
+    displayBox();
+  } while (!isGameOver)
+}
+
 const player1 = createPlayer('tomek');
 const player2 = createPlayer('opponent', 'O');
 
-try {
-  player1.move('A', 0);
-} catch (e) {
-  console.error(e);
-}
 console.log({ 
   name: player1.name,
   marker: player1.marker,
   score: player1.getScore()
 });
 
-// console.log(isGameOver());
-
-// clearBoard();
-// displayBoard();
-
-addBox();
-displayBox();
-console.log(currentTurn);
+play();
