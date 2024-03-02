@@ -109,9 +109,12 @@ const addBox = () => {
 const gameOver = () => {
   const modal = document.querySelector('.modal');
   const closeModal = document.querySelector('.close');
+  const scoreboard = document.getElementById('scoreboard');
   modal.style.display = 'block';
+  scoreboard.style.filter = 'brightness(0)';
   closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
+    scoreboard.style.filter = 'brightness(1)';
     clearBoard();
     displayBoard();
     displayBox();
