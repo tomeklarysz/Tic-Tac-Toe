@@ -61,7 +61,7 @@ const isGameOver = () => {
     return true;
   }
   return false;
-}
+};
 
 const canMove = (str) => str === ' ';
 
@@ -97,10 +97,25 @@ const addBox = () => {
         }
         displayBoard();
         displayBox();
+        if (isGameOver()) {
+          gameOver();
+        }
       });
       box.appendChild(p);
     }
   }
+}
+
+const gameOver = () => {
+  const modal = document.querySelector('.modal');
+  const closeModal = document.querySelector('.close');
+  modal.style.display = 'block';
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    clearBoard();
+    displayBoard();
+    displayBox();
+  });
 }
 
 const displayBox = () => {
@@ -114,12 +129,14 @@ const displayBox = () => {
 
 const play = () => {
   addBox();
-  do {
-    displayBoard();
-    displayBox();
-  } while (!isGameOver)
+  displayBoard();
+  displayBox();
 }
 
+// TODO:
+// end game when it's over
+// add points
+// add restart button
 const player1 = createPlayer('tomek');
 const player2 = createPlayer('opponent', 'O');
 
