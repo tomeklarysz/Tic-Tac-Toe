@@ -18,6 +18,16 @@ const clearBoard = () => {
   }
 };
 
+const start = document.getElementById('start');
+start.addEventListener('click', () => {
+  if (start.textContent === 'X starts') {
+    start.textContent = 'O starts';
+  } else {
+    start.textContent = 'X starts';
+  }
+  displayTurn();
+});
+
 const currentTurn = () => {
   let countX = 0;
   let countO = 0;
@@ -30,7 +40,11 @@ const currentTurn = () => {
       }
     }
   }
-  return countX <= countO ? 'X' : 'O';
+  if (start.textContent === 'X starts') {
+    return countX <= countO ? 'X' : 'O';
+  } else {
+    return countX >= countO ? 'O' : 'X';
+  }
 };
 
 // function to check if all elements from array are equal

@@ -54,12 +54,12 @@ p {
 
 .players {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .player {
-  padding: 20px;
+  padding: 10px;
 }
 
 .player > div:hover {
@@ -104,23 +104,34 @@ p {
   border: 3px solid white;
   border-radius: 5px;
   font-size: larger;
-  cursor: pointer;
   padding: 8px;
   margin-top: 20px;
 }
 
-#restart:hover,
-#reset:hover {
+button:hover {
+  cursor: pointer;
   background-color: white;
   color: black;
   border-color: black
 }
 
- #reset {
+#reset {
   font-size: large;
   margin-top: 0;
 }
 
 .name {
   padding: 5px;
+}
+
+#start {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: large
+}
+
+#start:hover {
+  color: lightblue;
+  background-color: black;
 }
