@@ -1,5 +1,5 @@
 let Gameboard = (function () {
-  let gameboard = [[' ', 'X', ' '], [' ', ' ', ' '], [' ', 'O', 'X']];
+  let gameboard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
   return gameboard;
 })();
 
@@ -77,9 +77,17 @@ function createPlayer(name, marker = 'X') {
   return { name, marker, getScore, addPoint, move };
 }
 
-const updateScore = (player) => {
-  player.addPoint();
-}
+const updateScore = () => {
+  const firstScore = document.getElementById('first-score');
+  const secondScore = document.getElementById('second-score');
+  if (currentTurn() === 'O') {
+    player1.addPoint();
+    firstScore.innerText = player1.getScore().toString();
+  } else {
+    player2.addPoint();
+    secondScore.innerText = player2.getScore().toString();
+  }
+};
 
 const addBox = () => {
   const box = document.querySelector('.tic-box');
@@ -107,6 +115,7 @@ const addBox = () => {
 }
 
 const gameOver = () => {
+  updateScore();
   const modal = document.querySelector('.modal');
   const closeModal = document.querySelector('.close');
   const scoreboard = document.getElementById('scoreboard');
@@ -143,10 +152,6 @@ const play = () => {
   displayBox();
 }
 
-// TODO:
-// end game when it's over
-// add points
-// add restart button
 const player1 = createPlayer('tomek');
 const player2 = createPlayer('opponent', 'O');
 
