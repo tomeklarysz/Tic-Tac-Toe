@@ -90,6 +90,17 @@ const updateScore = () => {
   }
 };
 
+const displayTurn = () => {
+  const turnPara = document.getElementById('turn');
+  const firstName = document.getElementById('first-name');
+  const secondName = document.getElementById('second-name');
+  if (currentTurn() === 'X') {
+    turnPara.innerText = `${firstName.textContent}'s turn`;
+  } else {
+    turnPara.innerText = `${secondName.textContent}'s turn`;
+  }
+};
+
 const addBox = () => {
   const box = document.querySelector('.tic-box');
   for (let row in Gameboard) {
@@ -106,6 +117,7 @@ const addBox = () => {
         }
         displayBoard();
         displayBox();
+        displayTurn();
         if (isGameOver()) {
           gameOver();
         }
@@ -128,6 +140,7 @@ const gameOver = () => {
     clearBoard();
     displayBoard();
     displayBox();
+    displayTurn();
   });
 }
 
@@ -145,6 +158,7 @@ restartBtn.addEventListener('click', () => {
   clearBoard();
   displayBoard();
   displayBox();
+  displayTurn();
 });
 
 const resetBtn = document.getElementById('reset');
@@ -164,14 +178,16 @@ players.forEach((element) => element.addEventListener('click', () => {
     range.moveToElementText(element);
     range.select();
   } else if (window.getSelection) {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      selection.removeAllRanges();
-      selection.addRange(range);
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 }));
+
 const play = () => {
+  displayTurn();
   addBox();
   displayBoard();
   displayBox();
