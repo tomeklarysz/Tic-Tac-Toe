@@ -110,6 +110,7 @@ const addBox = () => {
       p.addEventListener('click', () => {
         console.log(row);
         console.log(column);
+        restartBtn.style.display = 'block';
         if (currentTurn() === 'X') {
           player1.move(row, column);
         } else {
@@ -141,7 +142,12 @@ const gameOver = () => {
     displayBoard();
     displayBox();
     displayTurn();
+    restartBtn.style.display = 'none';
   });
+
+  // show reset points button only when players have any points
+  const reset = document.getElementById('reset');
+  reset.style.display = 'block';
 }
 
 const displayBox = () => {
@@ -159,6 +165,7 @@ restartBtn.addEventListener('click', () => {
   displayBoard();
   displayBox();
   displayTurn();
+  restartBtn.style.display = 'none';
 });
 
 const resetBtn = document.getElementById('reset');
@@ -169,6 +176,7 @@ resetBtn.addEventListener('click', () => {
   const secondScore = document.getElementById('second-score');
   firstScore.innerText = player1.getScore().toString();
   secondScore.innerText = player2.getScore().toString();
+  reset.style.display = 'none';
 });
 
 const players = document.querySelectorAll('.name');
@@ -203,6 +211,3 @@ console.log({
 });
 
 play();
-
-//TODO
-// hide buttons when they are not needed
