@@ -20,12 +20,14 @@ const clearBoard = () => {
 
 const start = document.getElementById('start');
 start.addEventListener('click', () => {
-  if (start.textContent === 'X starts') {
-    start.textContent = 'O starts';
-  } else {
-    start.textContent = 'X starts';
+  if (start.style.filter === 'brightness(1)') {
+    if (start.textContent === 'X starts') {
+      start.textContent = 'O starts';
+    } else {
+      start.textContent = 'X starts';
+    }
+    displayTurn();
   }
-  displayTurn();
 });
 
 const currentTurn = () => {
@@ -133,6 +135,7 @@ const addBox = () => {
         displayBoard();
         displayBox();
         displayTurn();
+        start.style.filter = 'brightness(0)';
         if (isGameOver()) {
           gameOver();
         }
@@ -157,6 +160,7 @@ const gameOver = () => {
     displayBox();
     displayTurn();
     restartBtn.style.display = 'none';
+    start.style.filter = 'brightness(1)';
   });
 
   // show reset points button only when players have any points
@@ -180,6 +184,7 @@ restartBtn.addEventListener('click', () => {
   displayBox();
   displayTurn();
   restartBtn.style.display = 'none';
+  start.style.filter = 'brightness(1)';
 });
 
 const resetBtn = document.getElementById('reset');
