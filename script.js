@@ -19,6 +19,7 @@ const clearBoard = () => {
 };
 
 const start = document.getElementById('start');
+start.style.filter = 'brightness(1)';
 start.addEventListener('click', () => {
   if (start.style.filter === 'brightness(1)') {
     if (start.textContent === 'X starts') {
