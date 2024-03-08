@@ -62,7 +62,11 @@ p {
   padding: 20px;
 }
 
-.player > div {
+.player > div:hover {
+  cursor: text;
+}
+
+.score {
   color: yellowgreen;
 }
 
@@ -114,4 +118,8 @@ p {
  #reset {
   font-size: large;
   margin-top: 0;
+}
+
+.name {
+  padding: 5px;
 }

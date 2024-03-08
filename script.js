@@ -157,6 +157,20 @@ resetBtn.addEventListener('click', () => {
   secondScore.innerText = player2.getScore().toString();
 });
 
+const players = document.querySelectorAll('.name');
+players.forEach((element) => element.addEventListener('click', () => {
+  if (document.body.createTextRange) {
+    const range = document.body.createTextRange();
+    range.moveToElementText(element);
+    range.select();
+  } else if (window.getSelection) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+  }
+}));
 const play = () => {
   addBox();
   displayBoard();
@@ -173,3 +187,6 @@ console.log({
 });
 
 play();
+
+//TODO
+// hide buttons when they are not needed
