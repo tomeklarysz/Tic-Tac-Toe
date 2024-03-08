@@ -69,12 +69,13 @@ function createPlayer(name, marker = 'X') {
   let score = 0;
   const getScore = () => score;
   const addPoint = () => score++;
+  const resetPoints = () => score = 0;
   const move = (column, row) => {
     if (canMove(Gameboard[column][row])) {
       Gameboard[column][row] = marker;
     }
   };
-  return { name, marker, getScore, addPoint, move };
+  return { name, marker, getScore, addPoint, resetPoints, move };
 }
 
 const updateScore = () => {
@@ -144,6 +145,16 @@ restartBtn.addEventListener('click', () => {
   clearBoard();
   displayBoard();
   displayBox();
+});
+
+const resetBtn = document.getElementById('reset');
+resetBtn.addEventListener('click', () => {
+  player1.resetPoints();
+  player2.resetPoints();
+  const firstScore = document.getElementById('first-score');
+  const secondScore = document.getElementById('second-score');
+  firstScore.innerText = player1.getScore().toString();
+  secondScore.innerText = player2.getScore().toString();
 });
 
 const play = () => {
