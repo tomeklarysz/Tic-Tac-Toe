@@ -130,6 +130,13 @@ const displayBox = () => {
   })
 }
 
+const restartBtn = document.getElementById('restart');
+restartBtn.addEventListener('click', () => {
+  clearBoard();
+  displayBoard();
+  displayBox();
+});
+
 const play = () => {
   addBox();
   displayBoard();
